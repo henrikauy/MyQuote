@@ -8,12 +8,6 @@
             <h5 class="card-title"> <%= quote.qtext %> </h5>
             <p class="card-text">
                 <strong><%= quote.source.fname %> <%= quote.source.lname %></strong><br />
-                Category(s):
-                <% quote.categories.each do |category| %>
-                        <%= category.catname %> 
-                    <% end %>
-                    <br />
-                Added by: <%= quote.user.fname %> <br />
                 [<a href="/quotes/<%= quote.id %>">Read full quote</a>]
             </p>
         </div>
