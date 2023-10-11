@@ -17,8 +17,16 @@
     <% if @quotematch.present? %>
         <h4 style="padding-top: 15px;">Results:</h4>
         <% @quotematch.each do |quote| %>
-            <h5 class="text-primary"><%= quote.source.fname %> <%= quote.source.lname %></h5>
-            <p><%= quote.qtext %> [<a href="/quotes/<%= quote.id %>">Read full quote</a>]</p>
+            <div>
+                <h5 class="text-primary"><%= quote.source.fname %> <%= quote.source.lname %></h5>
+                <h6>
+                    Category(s): 
+                    <% quote.categories.each do |category| %>
+                        <%= category.catname %>
+                    <% end %>
+                </h6>
+                <%= quote.qtext %> [<a href="/quotes/<%= quote.id %>">Read full quote</a>]
+            </div>
             <br />
         <% end %>
     <% else %>
