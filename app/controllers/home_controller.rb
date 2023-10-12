@@ -5,5 +5,6 @@ class HomeController < ApplicationController
 
   def uquotes
     @quotes = Quote.includes(:source).where(user_id: session[:user_id])
-    end
+  end
+  
 end
