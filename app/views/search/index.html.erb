@@ -17,20 +17,19 @@
     <% if @quotematch.present? %>
         <h4 style="padding-top: 15px;">Results:</h4>
         <% @quotematch.each do |quote| %>
-            <div>
-                <h5 class="text-primary"><%= quote.source.fname %> <%= quote.source.lname %></h5>
-                <h6>
-                    Category(s): 
-                    <% quote.categories.each do |category| %>
-                        <%= category.catname %>
-                    <% end %>
-                </h6>
-                <%= quote.qtext %> [<a href="/quotes/<%= quote.id %>">More details</a>]
+            <div class="card bg-body-tertiary" style="margin-bottom:10px">
+                <div class="card-body">
+                    <h5 class="card-title"> <%= quote.qtext %> </h5>
+                    <p class="card-text">
+                        <strong><%= quote.source.fname %> <%= quote.source.lname %></strong><br />
+                        [<a href="/quotes/<%= quote.id %>">More details</a>]
+                    </p>
+                </div>
             </div>
-            <br />
         <% end %>
     <% else %>
         <p>No matching quotes found.</p>
     <% end %>
 <% end %>
+
 

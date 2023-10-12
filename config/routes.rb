@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/userhome', to: 'home#uindex'
   get '/your-quotes', to: 'home#uquotes'
 
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

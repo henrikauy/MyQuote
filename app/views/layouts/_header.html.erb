@@ -40,7 +40,7 @@
             <%= link_to "My Account", userhome_path, class:"dropdown-item" %>
             <%= link_to "My Quotes", your_quotes_path, class:"dropdown-item" %>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Add New Quote</a></li>
+            <%= link_to "Add New Quote", new_quote_path, class:"dropdown-item" %>
           </ul>
           </li>
         <% end %>

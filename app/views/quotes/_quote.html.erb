@@ -1,32 +1,31 @@
-<div id="<%= dom_id quote %>">
-  <p>
-    <strong>Qtext:</strong>
-    <%= quote.qtext %>
-  </p>
+<div class="card bg-light mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%= quote.qtext %></h5>
+    <p class="card-text">
+      <h5><strong> <%= quote.source.full_name %> </strong></h5>
+      <strong>Birth Year:</strong> <%= quote.source.byear %><br>
+      <strong>Death Year:</strong> <%= quote.source.dyear %><br>
+      <strong>Biography:</strong> <%= quote.source.bio %><br><br>
 
-  <p>
-    <strong>Qyear:</strong>
-    <%= quote.qyear %>
-  </p>
+      <strong>Category(s):</strong> 
+      <% quote.categories.each do |category| %>
+        <%= category.catname %>
+        <% unless category == quote.categories.last %>, <% end %>
+      <% end %><br>
 
-  <p>
-    <strong>Qcom:</strong>
-    <%= quote.qcom %>
-  </p>
+      <% if quote.qyear? %>
+        <strong>Year:</strong> <%= quote.qyear %><br><br>
+      <% else %>
+        <strong>Year:</strong> - <br>
+      <% end %>
 
-  <p>
-    <strong>Ispublic:</strong>
-    <%= quote.ispublic %>
-  </p>
+      <strong>Uploaded by:</strong> <%= quote.user.fname %><br>
 
-  <p>
-    <strong>User:</strong>
-    <%= quote.user_id %>
-  </p>
-
-  <p>
-    <strong>Source:</strong>
-    <%= quote.source_id %>
-  </p>
-
+      <% if quote.qcom? %>
+        - "<%= quote.qcom %>"
+      <% else %>
+        - "no comment"
+      <% end %>
+    </p>
+  </div>
 </div>
