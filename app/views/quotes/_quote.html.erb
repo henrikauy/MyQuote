@@ -1,26 +1,32 @@
-<div class="card bg-light mb-3">
-  <div class="card-body">
-    <h5 class="card-title"><%= quote.qtext %></h5>
+<div class="card bg-light mb-3"> <!-- Container for a card -->
+  <div class="card-body"> <!-- Card body containing information -->
+    <h5 class="card-title"><%= quote.qtext %></h5> <!-- Display quote text as the title -->
     <p class="card-text">
-      <h5><strong> <%= quote.source.full_name %> </strong></h5>
-      <strong>Birth Year:</strong> <%= quote.source.byear %><br>
-      <strong>Death Year:</strong> <%= quote.source.dyear %><br>
-      <strong>Biography:</strong> <%= quote.source.bio %><br><br>
+      <h5><strong> <%= quote.source.full_name %> </strong></h5> <!-- Display the full name of source, full_name defined in app/model/source.rb -->
+      <strong>Birth Year:</strong> <%= quote.source.byear %><br> <!-- Display birth year -->
+      <strong>Death Year:</strong> <%= quote.source.dyear %><br> <!-- Display birth year -->
+      <strong>Biography:</strong> <%= quote.source.bio %><br><br> <!-- Display bio -->
 
+      <!-- Display the category/s of the quote -->
       <strong>Category(s):</strong> 
+
+      <!-- For each category the quote is in: -->
       <% quote.categories.each do |category| %>
-        <%= category.catname %>
-        <% unless category == quote.categories.last %>, <% end %>
+        <%= category.catname %> <!-- Display the category name  -->
+        <% unless category == quote.categories.last %>, <% end %> <!-- Display a "," after each category, until the last one  -->
       <% end %><br>
 
+      <!-- If quote year exists, display it otherwise display "-"  -->
       <% if quote.qyear? %>
         <strong>Year:</strong> <%= quote.qyear %><br><br>
       <% else %>
         <strong>Year:</strong> - <br>
       <% end %>
 
+      <!-- Display name of user the quote belongs to  -->
       <strong>Uploaded by:</strong> <%= quote.user.fname %><br>
 
+      <!-- If quote comment exists, display it otherwise display "no comment"  -->
       <% if quote.qcom? %>
         - "<%= quote.qcom %>"
       <% else %>

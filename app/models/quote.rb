@@ -84,19 +84,19 @@ class Quote < ApplicationRecord
 
   private
 
-  # Validation function to check if categories are present.
+  # function to check if categories are present.
   def check_category
     if categories.empty?
-      errors.add(:base, "Quote must be in atleast one category!")
+      errors.add(:base, "Quote must be in atleast one category!") # error message
     end
   end
 
   #-------------------------------AI GENERATIVE TOOLS END HERE-------------------------------------
   
-  # Validation method to check if quote text is present.
+  # function to check if quote text is present.
   def check_qtext
     if qtext.empty?
-      errors.add(:base, "Quote text cannot be blank!")
+      errors.add(:base, "Quote text cannot be blank!") # error message
     end
   end
 end

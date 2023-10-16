@@ -48,9 +48,11 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        # if user is updated by a user and is admin, go to the user details page of the user
         if logged_in? && is_administrator?
           format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
           format.json { render :show, status: :ok, location: @user }
+        # Otherwise if updated and is not admin, go to home page of user
         elsif logged_in? && !is_administrator?
           format.html { redirect_to '/userhome', notice: "Your account was successfully updated" }
           format.json { render :show, status: :ok, location: @user }
