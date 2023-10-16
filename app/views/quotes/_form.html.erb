@@ -33,12 +33,82 @@
     <% end %>
   </div>
 
+
+  <!-- ----------------------------------------- AI GENERATIVE TOOLS USED HERE -----------------------------------------
+    OpenAI. (2023). ChatGPT (Version 4) [AI text generation tool]. https://chat.openai.com/
+      Prompt:
+      <div class="form-group" style="padding-bottom: 10px;">
+      <%= f.label :category_ids, "Categories", class: "form-label" %>
+      <%= f.collection_select :category_ids, Category.all, :id, :catname, {}, { multiple: true, class: 'form-control' } %>
+      </div>
+    I can select multiple categories using shift + click. Is it possible for me to make it a checkbox instead?
+  -->
+  <div class="form-group" style="padding-bottom: 10px;">
+    <%= f.label :category_ids, "Categories", class: "form-label" %>
+    <% Category.all.each do |category| %>
+      <div class="form-check">
+        <%= f.check_box :category_ids, { multiple: true, class: 'form-check-input' }, category.id, nil %>
+        <%= f.label category.catname, class: 'form-check-label' %>
+      </div>
+    <% end %>
+  </div>
+  <!-- --------------------------------------AI GENERATIVE TOOLS END HERE--------------------------------------- -->
+
   <div class="form-group" style="padding-bottom: 10px;">
     <%= f.label :source_id, "Source", class: "form-label" %>
-    <%= f.collection_select :source_id, Source.all, :id, :full_name, {prompt: 'Select a Source'}, class: 'form-control' %>
+    <%= f.collection_select :source_id, Source.all, :id, :full_name, {prompt: 'Select a source'}, {class: 'form-control', id: 'existing-source'} %>
+    <br>
+    <button type="button" id="add-new-source" class="btn btn-secondary">Add New Source</button>
+
+  <!-- --------------------------------------AI GENERATIVE TOOLS USED BELOW--------------------------------------- 
+  OpenAI. (2023). ChatGPT (Version 4) [AI text generation tool]. https://chat.openai.com/
+  *** Using same prompt as the one found in app/models/quote.rb ***
+  -->
+    <div id="new-source-fields" style="display: none;">
+      <%= f.fields_for :source, Source.new do |source_fields| %>
+        <%= source_fields.label :fname, "First Name" %>
+        <%= source_fields.text_field :fname, class: 'form-control' %>
+
+        <%= source_fields.label :lname, "Last Name" %>
+        <%= source_fields.text_field :lname, class: 'form-control' %>
+
+        <%= source_fields.label :byear, "Birth Year" %>
+        <%= source_fields.text_field :byear, class: 'form-control' %>
+
+        <%= source_fields.label :dyear, "Death Year (if applicable)" %>
+        <%= source_fields.text_field :dyear, class: 'form-control' %>
+
+        <%= source_fields.label :bio, "Short Biography (optional)" %>
+        <%= source_fields.text_area :bio, class: 'form-control' %>
+      <% end %>
+    </div>
   </div>
+<!-- --------------------------------------AI GENERATIVE TOOLS END HERE --------------------------------------- --> 
 
   <div class="mt-3">
     <%= f.submit 'Save Quote', class: 'btn btn-primary btn-lg' %>
   </div>
 <% end %>
+
+
+
+<!-- --------------------------------------AI GENERATIVE TOOLS USED BELOW--------------------------------------- 
+OpenAI. (2023). ChatGPT (Version 4) [AI text generation tool]. https://chat.openai.com/
+*** Using same prompt as the one found in app/models/quote.rb ***
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#add-new-source').click(function(){
+      $('#new-source-fields').show();
+      $('#existing-source').val(""); // clear the existing source selection
+    });
+
+    $('#existing-source').change(function(){
+      if($(this).val() != "") {
+        $('#new-source-fields').hide(); // hide the new source fields if an existing source is selected
+      }
+    });
+  });
+</script>
+<!-- --------------------------------------AI GENERATIVE TOOLS END HERE --------------------------------------- -->

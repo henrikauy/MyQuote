@@ -6,14 +6,16 @@
                 <%= text_field_tag :search_query, params[:search_query], placeholder: 'Search', class: "form-control" %>
             </div>
             <div class ="col-2">
-                <%= select_tag(:search_type, options_for_select([['Quote', 'quote'], ['Category', 'category'], ['Philosopher', 'source']]), class:"form-select")  %>
+                <%= select_tag :view_category, options_from_collection_for_select(Category.all, "id", "catname"), prompt: "Select a Category", class: "form-select" %>
             </div>
         </div>    
     </div>
     <%= submit_tag 'Find Quotes', class: "btn btn-primary" %>
 <% end %>
 
-<% if params[:search_query].present? %>
+<br>
+
+<% if params[:view_category].present? || params[:search_query].present? %>
     <% if @quotematch.present? %>
         <h4 style="padding-top: 15px;">Results:</h4>
         <% @quotematch.each do |quote| %>
@@ -31,5 +33,3 @@
         <p>No matching quotes found.</p>
     <% end %>
 <% end %>
-
-
