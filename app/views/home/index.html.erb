@@ -1,13 +1,18 @@
+<!-- Home Page -->
+
 <h1>Welcome to MyQuote</h1>
 <p>Share and discover quotes from around the world!</p>
 <h3>Recently Added Quotes</h3>
 <hr />
+
+<!-- for each quote defined in controllers/home_controller.rb: -->
 <% @quotes.each do |quote| %>
+    <!-- Create a card with quote text, source, and link to the quote for more details -->
     <div class="card bg-body-tertiary" style="margin-bottom:10px">
         <div class="card-body">
             <h5 class="card-title"> <%= quote.qtext %> </h5>
             <p class="card-text">
-                <strong><%= quote.source.fname %> <%= quote.source.lname %></strong><br />
+                <strong><%= quote.source.full_name%></strong><br />
                 [<a href="/quotes/<%= quote.id %>">More details</a>]
             </p>
         </div>

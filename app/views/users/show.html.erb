@@ -1,11 +1,18 @@
+<!-- Display notification messages -->
 <p style="color: green"><%= notice %></p>
 
+<!-- render user details -->
 <%= render @user %>
 
-<div>
-  <%= link_to "Edit user", edit_user_path(@user) %> |
-  <%= link_to "Back", users_path %>
-<div style="padding-top: 50px;">
-  <%= button_to "Delete Account", @user, method: :delete, class: 'btn btn-danger' %>
-</div>
-</div>
+<!-- If user is logged in and is either an admin, or the account owner: -->
+<% if logged_in? && (is_administrator? || current_user.id == @user.id) %>
+
+  <!-- Show links to edit user details, go back to the user home page, or show a button to delete the account -->
+  <div>
+    <%= link_to "Edit user details", edit_user_path(@user) %> |
+    <%= link_to "Back", users_path %>
+    <div style="padding-top: 50px;">
+      <%= button_to "Delete Account", @user, method: :delete, class: 'btn btn-danger' %>
+    </div>
+  </div>
+<% end %>

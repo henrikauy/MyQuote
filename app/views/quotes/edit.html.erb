@@ -1,10 +1,15 @@
+<!-- quote editing page -->
 <h1>Editing quote</h1>
 
+<!-- Render a form to edit the quote -->
 <%= render "form", quote: @quote %>
 
 <br>
 
 <div>
+  <!-- Link to view the current quote -->
   <%= link_to "Show this quote", @quote %> |
+
+  <!-- Link to go back to the quotes index page -->
   <%= link_to "Back to quotes", quotes_path %>
 </div>

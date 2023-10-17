@@ -1,5 +1,4 @@
 class Quote < ApplicationRecord
-  #Database associations
   belongs_to :user
   belongs_to :source
   has_many :quote_categories, dependent: :destroy
@@ -69,12 +68,12 @@ class Quote < ApplicationRecord
 
   # Allows quotes to accept nested attributes for its associated source, enabling the creation or updating of a source directly via the quote’s attributes.
   accepts_nested_attributes_for :source, allow_destroy: true, reject_if: :all_blank
-  #----------------------------------AI GENERATIVE TOOLS END HERE--------------------------------------
+  #----------------------------------AI GENERATIVE TOOLS END HERE----------------------------------------------------------------------------
   
   # Custom validation to check if the quote text is present.
   validate :check_qtext
 
-  #-------------------------------AI GENERATIVE TOOLS USED BELOW--------------------------------------
+  #-------------------------------AI GENERATIVE TOOLS USED BELOW-------------------------------------------------------------------------------
   #prompt:
   #validates :categories , presence: {message: "Quote must have be in atleast one category!"}
   #This is not validating properly. Categories has a many to many relationship with the quote
@@ -91,7 +90,7 @@ class Quote < ApplicationRecord
     end
   end
 
-  #-------------------------------AI GENERATIVE TOOLS END HERE-------------------------------------
+  #-------------------------------AI GENERATIVE TOOLS END HERE-----------------------------------------------------------------------------
   
   # function to check if quote text is present.
   def check_qtext

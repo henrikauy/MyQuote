@@ -1,21 +1,26 @@
+<!-- User details -->
+
 <div id="<%= dom_id user %>" class="my-4">
   
+  <!-- Display first name -->
   <div class="mb-3">
-    <label class="form-label"><strong>Fname:</strong></label>
+    <label class="form-label"><strong>First name:</strong></label>
     <div><%= user.fname %></div>
   </div>
 
+  <!-- Display last name -->
   <div class="mb-3">
-    <label class="form-label"><strong>Lname:</strong></label>
+    <label class="form-label"><strong>Last name:</strong></label>
     <div><%= user.lname %></div>
   </div>
 
+  <!-- Display email -->
   <div class="mb-3">
     <label class="form-label"><strong>Email:</strong></label>
     <div><%= user.email %></div>
   </div>
 
-
+  <!-- Account type -->
   <div class="mb-3">
     <label class="form-label"><strong>Account Type:</strong></label>
     <div>
@@ -27,6 +32,7 @@
     </div>
   </div>
 
+  <!-- User status -->
   <div class="mb-3">
     <label class="form-label"><strong>Status:</strong></label>
     <div><%= user.status %></div>

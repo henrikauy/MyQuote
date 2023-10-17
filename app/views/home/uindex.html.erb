@@ -1,4 +1,9 @@
+<!-- User home page -->
+
+<!-- Give successful login notice -->
 <p style="color: green"><%= notice %></p>
+
+<!-- Welcome user and show link to edit user details -->
 <strong><h3>Hello <%= session[:fname] %></h3></strong>
 <p>Welcome back to MyQuote!</p>
-<%= link_to "Edit your account details", edit_user_path(session[:user_id]) %>
+<%= link_to "Show account details", user_path(session[:user_id]) %>

@@ -1,10 +1,17 @@
-<h3>Your Quotes</h3>
+<!-- Users quotes page -->
+
+<h1>Your Quotes</h1>
 <hr />
-    <% @quotes.each do |quote| %>
-        <div class="card bg-body-tertiary" style="margin-bottom:10px">
-            <div class="card-body">
-                <h4 class="card-title"><%= quote.source.fname %> <%= quote.source.lname %></h4>
-                <p class="card-text"><%= quote.qtext %><br />[<a href="/quotes/<%= quote.id %>">Read full quote</a>]</p>
-            </div>
+
+<!-- For each quote owned by the current user, create a card with the quote text, source, and link to the quote -->
+<% @quotes.each do |quote| %>
+    <div class="card bg-body-tertiary" style="margin-bottom:10px">
+        <div class="card-body">
+            <h5 class="card-title"><%= quote.qtext %></h5>
+            <p class="card-text">
+            <strong><%= quote.source.full_name%></strong> <br />
+            [<a href="/quotes/<%= quote.id %>">More details</a>]
+            </p>
         </div>
+    </div>
 <% end %>

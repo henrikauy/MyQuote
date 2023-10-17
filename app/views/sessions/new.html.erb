@@ -1,15 +1,24 @@
+<!-- If error message is found, display it -->
 <% if flash[:error] %>
     <p class="error" style="color:red;"><%= flash[:error] %></p>
 <% end %>
 
 <h2>Sign in</h2>
+
+<!-- Form for user login -->
 <%= form_tag login_path, method: :post do %>
+    
+    <!-- Email field -->
     <div class="form-group" style="padding-bottom: 10px;">
         <%= email_field_tag :email, nil, required: true, placeholder: 'Email Address', class: 'form-control' %>
     </div>
+
+    <!-- Password field -->
     <div class="form-group" style="padding-bottom: 10px;">
         <%= password_field_tag :password, nil, required: true, placeholder: 'Password', class: 'form-control' %>
     </div>
+
+    <!-- Button to submit/ login -->
     <div>
         <%= submit_tag 'Login', class: 'btn btn-primary' %>
     </div>

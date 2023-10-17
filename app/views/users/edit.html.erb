@@ -1,3 +1,4 @@
+<!-- Display different heading depending on whether user is admin or not -->
 <div style="padding-top: 10px;">
 <% if logged_in? && is_administrator? %>
   <h3>Update User Details</h3>
@@ -6,12 +7,19 @@
   <% end %>
 </div>
 
+<!-- Render the user form -->
 <%= render "form", user: @user %>
+
+<!-- Provide navigation links to show all users or show user details if admin -->
 <% if logged_in? && is_administrator? %>
-<div style="padding-top: 10px;">
-<div>
-  <%= link_to "Show this user", @user %> |
-  <%= link_to "Back to users", users_path %>
-</div>
-</div>
+  <div style="padding-top: 10px;">
+    <%= link_to "Show user details", @user %> |
+    <%= link_to "Back to users", users_path %>
+  </div>
+  
+<!-- Otherwise, display navigation link to show user details only if standard user -->
+<% elsif logged_in? && !is_administrator? %>
+  <div style="padding-top: 10px;">
+    <%= link_to "Back to user details", @user %>
+  </div>
 <% end %>

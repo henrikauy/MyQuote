@@ -1,4 +1,7 @@
+<!-- new and update user form -->
 <%= form_with(model: user) do |form| %>
+
+  <!-- Display any errors -->
   <% if user.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,48 +14,59 @@
     </div>
   <% end %>
 
+  <!-- First name field -->
   <div class="form-group" style="padding-bottom: 10px;">
     <%= form.text_field :fname, placeholder: 'First Name', class: 'form-control', readonly: (logged_in? && is_administrator?) %>
   </div>
 
+  <!-- Last name field -->
   <div class="form-group" style="padding-bottom: 10px;">
     <%= form.text_field :lname, placeholder: 'Last Name', class: 'form-control', readonly: (logged_in? && is_administrator?) %>
   </div>
 
+  <!-- email field -->
   <div class="form-group" style="padding-bottom: 10px;">
     <%= form.text_field :email, placeholder: 'Email Address', class: 'form-control', readonly: (logged_in? && is_administrator?) %>
   </div>
 
+  <!-- password field -->
   <div class="form-group" style="padding-bottom: 10px;">
     <%= form.password_field :password, placeholder: user.password_digest.present? ? 'Password set' : 'Choose a strong password', class: 'form-control', readonly: (logged_in? && is_administrator?) %>
   </div>
 
+  <!-- If user is logged in as admin, show admin checkbox -->
   <div class="form-group" style="padding-bottom: 10px;">
   <% if logged_in? && is_administrator? %>
     <%= form.label :is_admin do %>
       Admin Role
     <%= form.check_box :is_admin %>
   <% end %>
+
+  <!-- Otherwise, set admin status to false -->
   <% else %>
     <%= form.hidden_field :is_admin, value: false %>
   <% end %>
   </div>
 
+  <!-- If user is logged in as admin, show status dropdown -->
   <div class="form-group" style="padding-bottom: 10px;">
   <% if logged_in? && is_administrator? %>
     <%= form.select :status, ['Active', 'Suspended', 'Banned'], {}, class: 'form-control' %>
+  <!-- Else if user is logged in an not admin, leave status to what it was -->
   <% elsif logged_in? && !is_administrator? %>
     <%= form.hidden_field :status %>
+  <!-- Otherwise if new user and not logged in, set new account to 'Active' -->
   <% else %>
     <%= form.hidden_field :status, value: "Active" %>
   <% end %>
   </div>
 
-  <div>
-  <% if logged_in? %>
-	  <%= form.submit 'Update', class: 'btn btn-primary' %>
-  <% else %>
-    <%= form.submit 'Submit', class: 'btn btn-primary' %>
-  <% end %>
+  <!-- If logged in, show submit button saying 'update', otherwise show submit button saying 'submit' -->
+  <div class="form-group" style="padding-bottom: 10px;">
+    <% if logged_in? %>
+      <%= form.submit 'Update', class: 'btn btn-primary' %>
+    <% else %>
+      <%= form.submit 'Submit', class: 'btn btn-primary' %>
+    <% end %>
   </div>
 <% end %>

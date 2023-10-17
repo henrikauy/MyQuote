@@ -1,8 +1,10 @@
+<!-- Display any notice message -->
 <p style="color: green"><%= notice %></p>
 
+<!-- Render the quote's detailed view -->
 <%= render @quote %>
 
-
+<!-- If current user is logged in and quote is owned by current user, show links to edit the quote, go back to user's quotes, or delete the quote -->
 <% if current_user && current_user.id == @quote.user_id %>
   <div>
     <%= link_to "Edit this quote", edit_quote_path(@quote) %> |
@@ -11,6 +13,7 @@
   <div>
     <%= button_to 'Delete Quote', @quote, method: :delete, class: 'btn btn-danger'%>
   </div>
+<!-- Otherwise, display a link to go back to previous page -->
 <% else %>
   <%= link_to "Back", :back %>
 <% end %>
