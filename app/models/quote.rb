@@ -4,6 +4,15 @@ class Quote < ApplicationRecord
   has_many :quote_categories, dependent: :destroy
   has_many :categories, through: :quote_categories
 
+  # Quote text validation, checking it's present and not overly long
+  validates :qtext, presence: { message: ": Quote can't be blank" }, length: { maximum: 500, too_long: ": %{count} characters is the maximum allowed for a quote" }
+
+  # Publication year validation, checking that its a proper year
+  validates :qyear, format: { with: /\A(\d+|\d+\s*BC)\z/, message: ": Publication year must be a valid year such as 1800 or 1000BC" }, allow_blank: true
+
+  # Comment validation, checking that its not too long
+  validates :qcom, length: { maximum: 500, too_long: ": %{count} characters is the maximum allowed for a comment" }
+
 =begin
   --------------------------------AI GENERATIVE TOOLS USED BELOW----------------------
   OpenAI. (2023). ChatGPT (Version 4) [AI text generation tool]. https://chat.openai.com/
@@ -69,11 +78,9 @@ class Quote < ApplicationRecord
   # Allows quotes to accept nested attributes for its associated source, enabling the creation or updating of a source directly via the quote’s attributes.
   accepts_nested_attributes_for :source, allow_destroy: true, reject_if: :all_blank
   #----------------------------------AI GENERATIVE TOOLS END HERE----------------------------------------------------------------------------
-  
-  # Custom validation to check if the quote text is present.
-  validate :check_qtext
 
   #-------------------------------AI GENERATIVE TOOLS USED BELOW-------------------------------------------------------------------------------
+  #OpenAI. (2023). ChatGPT (Version 4) [AI text generation tool]. https://chat.openai.com/
   #prompt:
   #validates :categories , presence: {message: "Quote must have be in atleast one category!"}
   #This is not validating properly. Categories has a many to many relationship with the quote
@@ -92,10 +99,5 @@ class Quote < ApplicationRecord
 
   #-------------------------------AI GENERATIVE TOOLS END HERE-----------------------------------------------------------------------------
   
-  # function to check if quote text is present.
-  def check_qtext
-    if qtext.empty?
-      errors.add(:base, "Quote text cannot be blank!") # error message
-    end
-  end
+
 end

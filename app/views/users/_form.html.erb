@@ -23,15 +23,25 @@
   <div class="form-group" style="padding-bottom: 10px;">
     <%= form.text_field :lname, placeholder: 'Last Name', class: 'form-control', readonly: (logged_in? && is_administrator?) %>
   </div>
-
+  <br>
   <!-- email field -->
   <div class="form-group" style="padding-bottom: 10px;">
     <%= form.text_field :email, placeholder: 'Email Address', class: 'form-control', readonly: (logged_in? && is_administrator?) %>
   </div>
 
+  <!-- email confirmation field -->
+  <div class="form-group" style="padding-bottom: 10px;">
+    <%= form.text_field :email_confirmation, placeholder: 'Confirm Email Address', class: 'form-control', readonly: (logged_in? && is_administrator?) %>
+  </div>
+  <br>
   <!-- password field -->
   <div class="form-group" style="padding-bottom: 10px;">
     <%= form.password_field :password, placeholder: user.password_digest.present? ? 'Password set' : 'Choose a strong password', class: 'form-control', readonly: (logged_in? && is_administrator?) %>
+  </div>
+  
+  <!-- password confirmation field -->
+  <div class="form-group" style="padding-bottom: 10px;">
+    <%= form.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'form-control', readonly: (logged_in? && is_administrator?) %>
   </div>
 
   <!-- If user is logged in as admin, show admin checkbox -->

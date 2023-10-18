@@ -6,8 +6,8 @@ class HomeController < ApplicationController
 
   # Quotes belonging to current user
   def uquotes
-    # Retrieve all quotes and their sources owned by the current user 
-    @quotes = Quote.includes(:source).where(user_id: session[:user_id])
+    # Retrieve all quotes owned by the current user 
+    @quotes = Quote.where(user_id: session[:user_id])
   end
   
 end
